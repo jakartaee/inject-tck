@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>jakarta.inject</groupId>
+    <artifactId>jakarta.inject-tck</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <name>Jakarta Dependency Injection API TCK</name>
+    <description>The Jakarta Dependency Injection API - TCK</description>
+    <url>https://github.com/eclipse-ee4j/injection-tck</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+  <scm>
+    <connection>scm:git:ssh://git@github.com/eclipse-ee4j/injection-tck.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/eclipse-ee4j/injection-tck.git</developerConnection>
+    <url>https://github.com/eclipse-ee4j/injection-tck</url>
+    <tag>HEAD</tag>
+  </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.7</version>
+        </dependency>
+    </dependencies>
+
+    <developers>
+        <developer>
+            <id>various</id>
+            <name>Various</name>
+            <email>cdi-dev@eclipse.org</email>
+            <url>https://accounts.eclipse.org/mailing-list/cdi-dev</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+</project>
+
