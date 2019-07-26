@@ -8,6 +8,7 @@
 
     <properties>
         <runSuite>**/SampleBootstrapTCK.class</runSuite>
+        <weld.version>2.4.8.Final</weld.version>
     </properties>
 
     <dependencies>
@@ -24,7 +25,7 @@
         <dependency>
             <groupId>org.jboss.weld.se</groupId>
             <artifactId>weld-se-core</artifactId>
-            <version>3.1.1.Final</version>
+            <version>${weld.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
