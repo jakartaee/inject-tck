@@ -8,7 +8,7 @@
 
     <properties>
         <runSuite>**/SampleBootstrapTCK.class</runSuite>
-        <weld.version>2.4.8.Final</weld.version>
+        <weld.version>3.1.1.Final</weld.version>
     </properties>
 
     <dependencies>
