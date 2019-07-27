@@ -1,0 +1,146 @@
+= Jakarta Dependency Injection (DI) TCK
+
+This project contains the Jakarta Dependency Injection TCK and user guide.
+
+== Software Requirements
+
+* A Java SE 8 runtime
+* Maven 3.3.x +
+
+== Installation
+
+Download the TCK zip and unpack it to create a jakarta-di-tck-x.y directory containing
+this README and a jakarta-di-tck-x.y.jar file containing the TCK classes.
+
+=== Install the TCK jar Into Local Repo
+Use the following command to install the TCK jar into your local maven repository:
+
+[source,bash]
+----
+mvn org.apache.maven.plugins:maven-install-plugin:3.0.0-M1:install-file \
+-Dfile=target/jakarta.inject-tck-1.0.jar  -Dfile=jakarta-di-tck-x.y.jar
+----
+making sure your replace the x.y with the corresponding version found in the
+TCK download, e.g., 1.0.
+
+=== Running the TCK
+
+The DI TCK expects to be embedded a JUnit 4.x Test suite that is bootstrapped from within the DI
+implementation being tested. An example that uses the Weld 3.1.1.Final implementation
+and the standard Java SE bootstrap can be found in the example subdirectory. The Junit suite bootstrap
+code is as follows:
+
+[source,java]
+----
+import junit.framework.Test;
+import org.atinject.tck.Tck;
+import org.atinject.tck.auto.Car;
+
+import javax.enterprise.inject.se.SeContainer;
+import javax.enterprise.inject.se.SeContainerInitializer;
+
+public class SampleBootstrapTCK {
+
+    public static Test suite() {
+        SeContainer container = SeContainerInitializer.newInstance().initialize(); // <1>
+        Car tckCar = container.select(Car.class).get(); // <2>
+        return Tck.testsFor(tckCar, false, true); // <3>
+    }
+}
+----
+<1> Intialize the dependency container, in this case a CDI container.
+<2> Resolve the `org.atinject.tck.auto.Car` instance.
+<3> Pass the fully resolved car instance to the DI TCK to build the full testsuite which validates
+the expected object relationships.
+
+The full signature of the `org.atinject.tck.Tck#testsFor(...)` method is:
+
+[source,java]
+----
+    /**
+     * Constructs a JUnit test suite for the given {@link Car} instance.
+     *
+     * @param Car to test
+     * @param supportsStatic true if the injector supports static member injection
+     * @param supportsPrivate true if the injector supports private member injection
+     *
+     * @throws NullPointerException if car is null
+     * @throws ClassCastException if car doesn't extend {@link Convertible Convertible}
+     */
+    public static Test testsFor(Car car, boolean supportsStatic,
+            boolean supportsPrivate);
+----
+
+=== Configuring the DI Environment
+The `org.atinject.tck.Tck` class defines the expected conditions that need to be configured in
+the DI container in order for the tests to pass:
+
+* `org.atinject.tck.auto.Car` is implemented by
+ `org.atinject.tck.auto.Convertible`.
+* `@org.atinject.tck.auto.Drivers org.atinject.tck.auto.Seat1 is
+       implemented by `org.atinject.tck.auto.DriversSeat DriversSeat`.
+* `org.atinject.tck.auto.Seat` is implemented by `org.atinject.tck.auto.Seat` itself, and
+`org.atinject.tck.auto.Tire` by `org.atinject.tck.auto.Tire` itself (not subclasses).
+* `org.atinject.tck.auto.Engine` is implemented by `org.atinject.tck.auto.V8Engine`.
+* `@javax.inject.Named("spare") org.atinject.tck.auto.Tire` is implemented by
+     `org.atinject.tck.auto.accessories.SpareTire`.
+* The following classes may also be injected directly:
+** `org.atinject.tck.auto.accessories.Cupholder`
+** `org.atinject.tck.auto.accessories.SpareTire` and
+** `org.atinject.tck.auto.FuelTank`.
+
+Static and private member injection support is optional, but if your injector supports those features,
+it must pass the respective tests. If static member injection is supported, the static members of the
+following types shall also be injected once:
+
+* `org.atinject.tck.auto.Convertible`,
+* `org.atinject.tck.auto.Tire`, and
+* `org.atinject.tck.auto.accessories.SpareTire`.
+
+The Weld example accomplishes this by excluding inspection of certain beans via a beans.xml and with a `TCKProducers`
+class with producer methods that refine the values for the expected injection types.
+
+=== Running the Example
+You can run the Weld bootstrap example as follows:
+
+[source,bash]
+----
+Scotts-iMacPro:example starksm$ mvn compile test
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------< jakarta.inject:jakarta.inject-tck-example >--------------
+[INFO] Building Jakarta Dependency Injection API TCK Example 1.0
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+...
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running SampleBootstrapTCK
+Jul 26, 2019 6:33:20 PM org.jboss.weld.bootstrap.WeldStartup <clinit>
+INFO: WELD-000900: 3.1.1 (Final)
+Jul 26, 2019 6:33:21 PM org.jboss.weld.bootstrap.WeldStartup startContainer
+INFO: WELD-000101: Transactional services not available. Injection of @Inject UserTransaction not available. Transactional observers will be invoked synchronously.
+Jul 26, 2019 6:33:21 PM org.jboss.weld.environment.se.WeldContainer fireContainerInitializedEvent
+INFO: WELD-ENV-002003: Weld SE container 08dc1244-b725-4382-ad19-7eced6c55608 initialized
+[INFO] Tests run: 50, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.543 s - in SampleBootstrapTCK
+Weld SE container 08dc1244-b725-4382-ad19-7eced6c55608 shut down by shutdown hook
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 50, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.593 s
+[INFO] Finished at: 2019-07-26T18:33:21-07:00
+[INFO] ------------------------------------------------------------------------
+----
+
+
+== Where to file challenges
+
+Challenges and bug reports should be filed against the TCK project issue tracker at
+https://github.com/eclipse-ee4j/injection-tck/issues
