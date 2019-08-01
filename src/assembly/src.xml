@@ -12,7 +12,7 @@
       <outputDirectory>/</outputDirectory>
       <includes>
         <include>README*</include>
-        <include>LICENSE*</include>
+        <include>EFTL.txt</include>
         <include>NOTICE*</include>
       </includes>
     </fileSet>
