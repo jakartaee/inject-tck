@@ -16,9 +16,9 @@
 
 package org.atinject.tck.auto.accessories;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.inject.Singleton;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import jakarta.inject.Singleton;
 
 import org.atinject.tck.auto.Seat;
 

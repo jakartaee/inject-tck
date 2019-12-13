@@ -16,8 +16,8 @@
 
 package org.atinject.tck.auto;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import org.atinject.tck.auto.accessories.SpareTire;
 

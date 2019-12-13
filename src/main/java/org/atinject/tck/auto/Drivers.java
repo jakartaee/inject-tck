@@ -19,7 +19,7 @@ package org.atinject.tck.auto;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import javax.inject.Qualifier;
+import jakarta.inject.Qualifier;
 
 @Retention(RetentionPolicy.RUNTIME) @Qualifier
 public @interface Drivers {

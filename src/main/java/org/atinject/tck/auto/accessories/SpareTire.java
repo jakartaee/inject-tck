@@ -16,7 +16,7 @@
 
 package org.atinject.tck.auto.accessories;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.atinject.tck.auto.FuelTank;
 import org.atinject.tck.auto.Tire;

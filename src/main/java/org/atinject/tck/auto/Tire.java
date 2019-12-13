@@ -19,7 +19,7 @@ package org.atinject.tck.auto;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.atinject.tck.auto.accessories.RoundThing;
 import org.atinject.tck.auto.accessories.SpareTire;

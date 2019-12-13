@@ -16,8 +16,8 @@
 
 package org.atinject.tck.auto;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import org.atinject.tck.auto.accessories.Cupholder;
 
