@@ -16,9 +16,9 @@
 
 package org.atinject.tck.auto;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Provider;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Provider;
 
 import junit.framework.TestCase;
 import org.atinject.tck.auto.accessories.Cupholder;
