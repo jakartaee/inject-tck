@@ -18,15 +18,19 @@ Use the following command to install the TCK jar into your local maven repositor
 [source,bash]
 ----
 mvn org.apache.maven.plugins:maven-install-plugin:3.0.0-M1:install-file \
--Dfile=target/jakarta.inject-tck-1.0.jar  -Dfile=jakarta-di-tck-x.y.jar
+-Dfile=<path-to-tck-jar>/jakarta.inject-tck-1.0.jar  -Dfile=jakarta-di-tck-x.y.jar
 ----
 making sure your replace the x.y with the corresponding version found in the
-TCK download, e.g., 2.0.0.
+TCK download, e.g.:
+----
+mvn org.apache.maven.plugins:maven-install-plugin:3.0.0-M1:install-file \
+-Dfile=jakarta.inject-tck-2.0.0.RC1/jakarta.inject-tck-2.0.0.RC1.jar -Dfile=jakarta-di-tck-2.0.0.RC1.jar
+----
 
 === Running the TCK
 
 The DI TCK expects to be embedded a JUnit 4.x Test suite that is bootstrapped from within the DI
-implementation being tested. An example that uses the Weld 3.1.1.Final implementation
+implementation being tested. An example that uses the 4.0.0-SNAPSHOT implementation
 and the standard Java SE bootstrap can be found in the example subdirectory. The Junit suite bootstrap
 code is as follows:
 
@@ -109,7 +113,7 @@ Scotts-iMacPro:example starksm$ mvn test
 [INFO] Scanning for projects...
 [INFO]
 [INFO] -------------< jakarta.inject:jakarta.inject-tck-example >--------------
-[INFO] Building Jakarta Dependency Injection API TCK Example 2.0.0-SNAPSHOT
+[INFO] Building Jakarta Dependency Injection API TCK Example 2.0.0.RC1
 [INFO] --------------------------------[ jar ]---------------------------------
 ...
 [INFO]
@@ -134,7 +138,7 @@ Weld SE container b46a7a8a-5c6c-4d49-8a3f-a8a153b0173e shut down by shutdown hoo
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 [INFO] Total time:  2.545 s
-[INFO] Finished at: 2019-12-12T21:34:02-06:00
+[INFO] Finished at: 2019-12-19T16:59:31-06:00
 [INFO] ------------------------------------------------------------------------
 ----
 
