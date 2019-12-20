@@ -23,7 +23,7 @@ mvn org.apache.maven.plugins:maven-install-plugin:3.0.0-M1:install-file \
 making sure your replace <path-to-tck-jar> with the expanded download TCK archive directory and the x.y with the corresponding version found in the TCK download, e.g.:
 ----
 mvn org.apache.maven.plugins:maven-install-plugin:3.0.0-M1:install-file \
--Dfile=jakarta.inject-tck-2.0.0-SNAPSHOT/jakarta.inject-tck-2.0.0-SNAPSHOT.jar
+-Dfile=jakarta.inject-tck-2.0.0.RC1/jakarta.inject-tck-2.0.0.RC1.jar
 ----
 
 === Running the TCK
@@ -112,7 +112,7 @@ Scotts-iMacPro:example starksm$ mvn test
 [INFO] Scanning for projects...
 [INFO]
 [INFO] -------------< jakarta.inject:jakarta.inject-tck-example >--------------
-[INFO] Building Jakarta Dependency Injection API TCK Example 2.0.0-SNAPSHOT
+[INFO] Building Jakarta Dependency Injection API TCK Example 2.0.0.RC1
 [INFO] --------------------------------[ jar ]---------------------------------
 ...
 [INFO]
