@@ -60,7 +60,7 @@ import junit.framework.TestSuite;
  *       (not subclasses).
  *   <li>{@link org.atinject.tck.auto.Engine Engine} is implemented by
  *       {@link org.atinject.tck.auto.V8Engine V8Engine}.
- *   <li>{@link javax.inject.Named @Named("spare")}
+ *   <li>{@link jakarta.inject.Named @Named("spare")}
  *       {@link org.atinject.tck.auto.Tire Tire} is implemented by
  *       {@link org.atinject.tck.auto.accessories.SpareTire SpareTire}.
  *   <li>The following classes may also be injected directly:
@@ -98,8 +98,8 @@ public class Tck {
      *  injection
      *
      * @throws NullPointerException if car is null
-     * @throws ClassCastException if car doesn't extend
-     *  {@link Convertible Convertible}
+     * @throws ClassCastException if car doesn't extend {@link Convertible Convertible}
+     * @return the unit Test instance
      */
     public static Test testsFor(Car car, boolean supportsStatic,
             boolean supportsPrivate) {
