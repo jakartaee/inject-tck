@@ -2,14 +2,16 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jakarta.inject</groupId>
     <artifactId>jakarta.inject-tck-example</artifactId>
-    <version>2.0.0.RC1</version>
+    <version>2.0.0-RC2</version>
     <name>Jakarta Dependency Injection API TCK Example</name>
     <description>The Jakarta Dependency Injection API - TCK Example</description>
 
     <properties>
         <runSuite>**/SampleBootstrapTCK.class</runSuite>
-        <weld.version>4.0.0-SNAPSHOT</weld.version>
-        <atinject.version>2.0.0.RC1</atinject.version>
+        <!-- Weld SE core version -->
+        <weld.version>4.0.0.Alpha2</weld.version>
+        <!-- dependency-injection api jar version -->
+        <atinject.version>2.0.0-RC4</atinject.version>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
