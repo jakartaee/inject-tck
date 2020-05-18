@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jakarta.inject</groupId>
     <artifactId>jakarta.inject-tck-example</artifactId>
-    <version>2.0.0-RC2</version>
+    <version>2.0.0-RC4</version>
     <name>Jakarta Dependency Injection API TCK Example</name>
     <description>The Jakarta Dependency Injection API - TCK Example</description>
 
