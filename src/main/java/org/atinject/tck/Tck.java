@@ -81,7 +81,7 @@ import junit.framework.TestSuite;
  * your IDE or JUnit's command line runner:
  *
  * <pre>
- * java -cp javax.inject-tck.jar:junit.jar:myinjector.jar \
+ * java -cp jakarta.inject-tck.jar:junit.jar:myinjector.jar \
  *     junit.textui.TestRunner MyTck</pre>
  */
 public class Tck {
