@@ -20,6 +20,7 @@ import jakarta.inject.Inject;
 
 import org.atinject.tck.auto.accessories.Cupholder;
 
+@Drivers
 public class DriversSeat extends Seat {
 
     @Inject
