@@ -24,18 +24,20 @@ making sure your replace <path-to-tck-jar> with the expanded download TCK archiv
 version found in the TCK download, e.g.:
 ----
 mvn org.apache.maven.plugins:maven-install-plugin:3.0.0-M1:install-file \
--Dfile=jakarta.inject-tck-2.0.0/jakarta.inject-tck-2.0.0.jar
+-Dfile=/tmp/jakarta.inject-tck-2.0.1.jar
 ----
 
 === Running the TCK
 
 The DI TCK expects to be embedded a JUnit 4.x Test suite that is bootstrapped from within the DI
-implementation being tested. An example that uses the 4.0.0-SNAPSHOT implementation
+implementation being tested. An example that uses the 5.0.0.CR2 Weld implementation
 and the standard Java SE bootstrap can be found in the example subdirectory. The Junit suite bootstrap
 code is as follows:
 
 [source,java]
 ----
+package weld;
+
 import junit.framework.Test;
 import org.atinject.tck.Tck;
 import org.atinject.tck.auto.Car;
@@ -46,9 +48,14 @@ import jakarta.enterprise.inject.se.SeContainerInitializer;
 public class SampleBootstrapTCK {
 
     public static Test suite() {
-        SeContainer container = SeContainerInitializer.newInstance().initialize(); // <1>
-        Car tckCar = container.select(Car.class).get(); // <2>
-        return Tck.testsFor(tckCar, false, true); // <3>
+
+        SeContainer container = SeContainerInitializer
+                .newInstance()
+                .addExtensions(AtInjectTCKExtension.class)
+                .addPackages(true, Tck.class)
+                .initialize();
+        Car tckCar = container.select(Car.class).get();
+        return Tck.testsFor(tckCar, false, true);
     }
 }
 ----
@@ -113,22 +120,25 @@ Scotts-iMac:example starksm$ mvn test
 [INFO] Scanning for projects...
 [INFO]
 [INFO] -------------< jakarta.inject:jakarta.inject-tck-example >--------------
-[INFO] Building Jakarta Dependency Injection API TCK Example 2.0.0
+[INFO] Building Jakarta Dependency Injection API TCK Example 2.0.1
 [INFO] --------------------------------[ jar ]---------------------------------
 ...
-[INFO]
+[INFO] Building Jakarta Dependency Injection API TCK Example 2.0.1
 [INFO] -------------------------------------------------------
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
-[INFO] Running SampleBootstrapTCK
-Jul 06, 2020 10:47:23 PM org.jboss.weld.bootstrap.WeldStartup <clinit>
-INFO: WELD-000900: 4.0.0 (Alpha2)
-Jul 06, 2020 10:47:23 PM org.jboss.weld.bootstrap.WeldStartup startContainer
+[INFO] Running weld.SampleBootstrapTCK
+Jun 13, 2022 7:34:10 PM org.jboss.weld.bootstrap.WeldStartup <clinit>
+INFO: WELD-000900: 5.0.0 (SP2)
+Jun 13, 2022 7:34:11 PM org.jboss.weld.bootstrap.WeldStartup startContainer
 INFO: WELD-000101: Transactional services not available. Injection of @Inject UserTransaction not available. Transactional observers will be invoked synchronously.
-Jul 06, 2020 10:47:23 PM org.jboss.weld.environment.se.WeldContainer fireContainerInitializedEvent
-INFO: WELD-ENV-002003: Weld SE container 8f6770d3-d00a-444d-97ec-b1b7d090512a initialized
-[INFO] Tests run: 50, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.553 s - in SampleBootstrapTCK
-Weld SE container 8f6770d3-d00a-444d-97ec-b1b7d090512a shut down by shutdown hook
+Added @Spare to [BackedAnnotatedField] @Inject org.atinject.tck.auto.Convertible.spareTire
+Added @Drivers to: [BackedAnnotatedType] public  class org.atinject.tck.auto.DriversSeat
+Added @Named('spare') to: [BackedAnnotatedType] public  class org.atinject.tck.auto.accessories.SpareTire
+Jun 13, 2022 7:34:12 PM org.jboss.weld.environment.se.WeldContainer fireContainerInitializedEvent
+INFO: WELD-ENV-002003: Weld SE container 19d8ee8b-cc7c-4131-930c-3350bb374196 initialized
+[INFO] Tests run: 50, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.504 s - in weld.SampleBootstrapTCK
+Weld SE container 19d8ee8b-cc7c-4131-930c-3350bb374196 shut down by shutdown hook
 [INFO]
 [INFO] Results:
 [INFO]
@@ -137,9 +147,7 @@ Weld SE container 8f6770d3-d00a-444d-97ec-b1b7d090512a shut down by shutdown hoo
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.276 s
-[INFO] Finished at: 2020-07-06T22:47:24-05:00
-[INFO] ------------------------------------------------------------------------
+
 ----
 
 

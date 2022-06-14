@@ -9,7 +9,7 @@
     <properties>
         <runSuite>**/SampleBootstrapTCK.class</runSuite>
         <!-- Weld SE core version -->
-        <weld.version>4.0.0.Alpha2</weld.version>
+        <weld.version>5.0.0.SP2</weld.version>
         <!-- dependency-injection api jar version -->
         <atinject.version>2.0.0</atinject.version>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -90,4 +90,3 @@
         </plugins>
     </build>
 </project>
-
